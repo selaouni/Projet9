@@ -10,7 +10,7 @@ Développez une application Web en utilisant Django
 Idriss Benjeloun
 
 ## Description:   
-l'objectif principale du projet est 
+l'objectif principale du projet est de developper une application qui permet de faire des critiques de livres
 
 - xxx
 - xxx
