@@ -40,11 +40,12 @@ une critique de livres à la demande.
 
 
 ## Acknowledgments (code inspiration): 
-
+- https://openclassrooms.com/fr/courses/7192426-allez-plus-loin-avec-le-framework-django
+- https://openclassrooms.com/fr/courses/7172076-debutez-avec-le-framework-django
 - https://www.moonbooks.org/Articles/Comment-supprimer-une-table-dans-une-base-de-donnees-avec-le-framework-web-django-/
 - https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html
-- https://
-- https://
+- https://prograide.com/pregunta/61054/comment-inclure-des-fichiers-image-dans-les-modeles-django
+- https://developer.mozilla.org/fr/docs/Learn/Server-side/Django/Home_page
 - https://
 - https://
 - https://

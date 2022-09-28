@@ -14,14 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-
+from django.contrib.auth.views import LoginView
 from django.contrib import admin
 from django.urls import path
 import authentication.views
+import flux.views
 
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', authentication.views.login_page, name='login'),
+    # path('', authentication.views.login_page, name='login'),
+    #path('', authentication.views.LoginPageView.as_view(), name='login'),
+    path('', LoginView.as_view(
+                template_name='authentication/login.html',
+                redirect_authenticated_user=True),
+            name='login'),
+    path('home/', flux.views.home, name='home'),
+    path('logout/', authentication.views.logout_user, name='logout'),
+    path('flux/create_ticket', flux.views.create_ticket, name='ticket_create'),
+
 ]

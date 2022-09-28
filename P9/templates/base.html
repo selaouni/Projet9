@@ -3,10 +3,21 @@
 
 <html>
     <head>
-        <title>LITReview</title>
+        <title> </title>
+
+
     </head>
     <body>
-        <h1>LITReview</h1>
-        {% block content %}{% endblock content %}
+
+
+
+        <h1>LITReview </h1>
+            {% block sidebar %}
+            <!-- insert default navigation text for every page -->
+            {% endblock %}
+            {% block content %}{% endblock content %}
+            {%  if user.is_authenticated %}
+                <p>Vous êtes connecté en tant que {{ request.user }}. <a href="{% url 'logout' %}">Se déconnecter</a></p>
+            {% endif %}
     </body>
 </html>
