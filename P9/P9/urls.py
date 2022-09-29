@@ -33,5 +33,6 @@ urlpatterns = [
     path('home/', flux.views.home, name='home'),
     path('logout/', authentication.views.logout_user, name='logout'),
     path('flux/create_ticket', flux.views.create_ticket, name='ticket_create'),
+    path('signup/', authentication.views.signup_page, name='signup'),
 
 ]
