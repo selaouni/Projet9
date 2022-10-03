@@ -46,7 +46,7 @@ une critique de livres à la demande.
 - https://simpleisbetterthancomplex.com/tutorial/2016/07/26/how-to-reset-migrations.html
 - https://prograide.com/pregunta/61054/comment-inclure-des-fichiers-image-dans-les-modeles-django
 - https://developer.mozilla.org/fr/docs/Learn/Server-side/Django/Home_page
-- https://
+- https://iancarpenter.dev/2021/09/19/django-object-has-no-attribute-save/
 - https://
 - https://
 - Discord DA python

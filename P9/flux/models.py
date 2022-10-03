@@ -4,15 +4,15 @@ from django.db import models
 
 # Create your models here.
 
-
-
-
 class Ticket(models.Model):
     title = models.fields.CharField(max_length=128)
     description = models.TextField(max_length=2048, blank=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
     time_created = models.fields.DateTimeField(auto_now_add=True)
+
+    # def save(self, *args, **kw):
+    #     super(TicketFormC, self).save(*args, **kw)
 
 
 class Review(models.Model):
@@ -33,6 +33,8 @@ class UserFollows(models.Model):
 
 # class user(models.Model):
 #     # django.contrib.auth.models.User
+
+
 
 
 
