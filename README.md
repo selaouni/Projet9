@@ -10,7 +10,7 @@ Développez une application Web en utilisant Django
 Idriss Benjeloun
 
 ## Description:   
-l'obce projet concerne le  developpement d'une application qui permet de faire des critiques de livres
+le projet concerne le  developpement d'une application qui permet de faire des critiques de livres
 l'objectif principal est de commercialiser un produit permettant à une communauté d'utilisateurs de consulter ou de solliciter
 une critique de livres à la demande.
 
