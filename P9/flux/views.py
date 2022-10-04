@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from . import forms
+from django.contrib import messages
 
 # Create your views here.
 
@@ -16,9 +17,10 @@ def create_ticket(request):
         c_ticket_form = forms.TicketFormC(request.POST, request.FILES)
         print(request.FILES)
         if c_ticket_form.is_valid():
-           c_ticket_form.save(commit=False)
-           # ticket.author = request.user
-           # ticket.save()
+           ticket = c_ticket_form.save(commit=False)
+           ticket.user = request.user
+           ticket.save()
+           messages.success(request, "Ticket sauvegardée avec succes!")
            return redirect('home')
     context = {
         'c_ticket_form': c_ticket_form,
@@ -26,3 +28,39 @@ def create_ticket(request):
     return render(request, 'flux/ticket_create.html', context=context)
 
 
+@login_required
+def create_review(request):
+    c_review_form = forms.ReviewFormC()
+    if request.method == 'POST':
+        c_review_form = forms.TicketFormC(request.POST, request.FILES)
+        print(request.FILES)
+        if c_review_form.is_valid():
+           review = c_review_form.save(commit=False)
+           review.user = request.user
+           review.save()
+           messages.success(request, "Critique sauvegardée avec succes!")
+           return redirect('home')
+    context = {
+        'c_review_form': c_review_form,
+            }
+    return render(request, 'flux/review_create1.html', context=context)
+
+# @login_required
+# def create_ticket(request):
+#     c_ticket_form = forms.TicketFormC()
+#     if request.method == 'POST':
+#         c_ticket_form = forms.TicketFormC(request.POST)
+#         print(request.FILES)
+#         if c_ticket_form.is_valid():
+#            ticket = c_ticket_form.save(commit=False)
+#            ticket.author = request.user
+#            # c_ticket_form.cleaned_data["user"] = request.user
+#            ticket.save()
+#
+#
+#            messages.success(request, "Ticket sauveagradé avec success!")
+#         return redirect('home')
+#     context = {
+#         'c_ticket_form': c_ticket_form,
+#             }
+#     return render(request, 'flux/ticket_create.html', context=context)
