@@ -19,6 +19,9 @@ from django.contrib import admin
 from django.urls import path
 import authentication.views
 import flux.views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 
 
@@ -35,5 +38,10 @@ urlpatterns = [
     path('signup/', authentication.views.signup_page, name='signup'),
     path('flux/create_ticket', flux.views.create_ticket, name='ticket_create'),
     path('flux/create_review', flux.views.create_review, name='review_create1'),
+    path('flux/subscribe', flux.views.subscription_page, name='Subscription'),
 
 ]
+# code pour flux
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

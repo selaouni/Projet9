@@ -10,22 +10,22 @@ class TicketFormC(ModelForm):
         # titre = forms.TextInput()
         # description = forms.TextInput()
         fields = ['title', 'description', 'image']
-    title = forms.CharField(label="Titre", label_suffix="")
-    description = forms.CharField(max_length=2048, label_suffix="")
-    image = forms.ImageField(label_suffix="", required=False, )
+    # title = forms.CharField(label="Titre", label_suffix="")
+    # description = forms.CharField(max_length=2048, label_suffix="")
+    # image = forms.ImageField(label_suffix="", required=False, )
 
 
 class ReviewFormC(ModelForm):
     RATINGS_CHOICES = [(0, "0"), (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")]
     class Meta:
         model = models.Review
-        fields = ['title', 'description', 'image', 'headline', 'rating', 'body']
-    title = forms.CharField(label="Titre", label_suffix="")
-    description = forms.CharField(max_length=2048, label_suffix="")
-    image = forms.ImageField(label_suffix="", required=False, )
-    headline = forms.CharField(max_length=128, label="Titre")
+        fields = ['headline', 'rating', 'body']
+    # title = forms.CharField(label="Titre", label_suffix="")
+    # Description = forms.CharField(max_length=2048, label_suffix="")
+    # image = forms.ImageField(label_suffix="", required=False, )
+    # headline = forms.CharField(max_length=128, label="Titre")
     rating = forms.ChoiceField(label="Note", widget=forms.RadioSelect, choices=RATINGS_CHOICES)
-    body = forms.CharField(max_length=8192, label="Commentaire")
+    # body = forms.CharField(max_length=8192, label="Commentaire")
 
 
 form = TicketFormC()

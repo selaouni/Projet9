@@ -3,9 +3,6 @@ from django.contrib.auth import login, authenticate
 from . import forms
 
 
-
-
-
 def login_page(request):
     form = forms.LoginForm()
     message = ''

@@ -1,9 +1,10 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
 from django.db import models
+from six import python_2_unicode_compatible
 
 # Create your models here.
-
+@python_2_unicode_compatible
 class Ticket(models.Model):
     title = models.fields.CharField(max_length=128)
     description = models.TextField(max_length=2048, blank=True)

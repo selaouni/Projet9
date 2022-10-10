@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-
+{% load static %}
 
 <html>
     <head>
         <title> </title>
-
+        <link rel="stylesheet" href="{% static 'styles.css' %}" />
 
     </head>
     <body>
 
-
-
         <h1>LITReview </h1>
             {% block sidebar %}
+            <div class="sidebar-nav">
+               <a href="{% url 'home' %}">-- Flux -</a>
+               <a href=""> - Posts-  </a>
+               <a href="{% url 'Subscription' %}"> - Abonnemements - </a>
+               <a href="{% url 'ticket_create' %}"> - Créer un ticket - </a>
+               <a href="{% url 'review_create1' %}"> - Créer une critique --</a>
+                <br>
+                <br>
+                <br>
+
+           </div>
             <!-- insert default navigation text for every page -->
             {% endblock %}
             {% block content %}{% endblock content %}
