@@ -1,0 +1,14 @@
+html {
+    background-color: #111;
+}
+
+
+.bar-nav {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+}
+
+.mon-flux{
+border-width:2px;
+}
