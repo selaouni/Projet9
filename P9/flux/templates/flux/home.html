@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
 {% extends 'base.html' %}
-{% load flux_extras %}
 {% load static %}
+<html lang="en">
+
+{% load flux_extras %}
+
 <head>
-    <img src="{% static 'images/logo.jpg' %}" alt="UML diagram" style="width:555px;height:540px;">
+
+
     <meta charset="UTF-8">
     <title>Home page</title>
     {% block title %}<title>LITReview</title>{% endblock %}
@@ -24,13 +27,24 @@
          <div class="mon-flux">
               {% block content %}
 
-                <button type="submit"  onclick="{% url 'ticket_create' %}" > Demander une critique </button>
-                <button type="submit" onclick="{% url 'review_create1' %}" > Créer une critique</button>
+             <button>  <a href="{% url 'ticket_create' %}" > Demander une critique </a> </button>
+             <button>  <a href="{% url 'review_create1' %}" > Créer une critique</a> </button>
                 <h2> Votre flux </h2>
-                    {% for f in flux %}
-                        <img src="{{ f.image.url }}">
+                    {% for f in flux_ticket %}
+                        <p>{{ f.time_created }}</p>
+                        <p>{{ f.user }} a demandé une critique </p>
+                        <p>{{ f.title }}</p>
                         <p>{{ f.description }}</p>
+                        <img src="{{ f.image.url }}">
+                        <p>___________________________________________________________________</p>
+
                     {% endfor %}
+<!--                    {% for f in flux_review %}-->
+<!--                        <p>{{ f.time_created }}</p>-->
+<!--                        <p>{{ f.user }} a publié une critique </p>-->
+<!--                        <p>{{ f.rating }}</p>-->
+
+<!--                    {% endfor %}-->
 
 
              {% endblock content%}

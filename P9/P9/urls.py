@@ -40,6 +40,10 @@ urlpatterns = [
     path('flux/create_review', flux.views.create_review, name='review_create1'),
     path('flux/subscribe', flux.views.follow_users, name='Subscription'),
     path('flux/post', flux.views.post, name='post'),
+    path('flux/ticket_update', flux.views.update_ticket, name='ticket_update'),
+    path('flux/ticket_delete', flux.views.delete_ticket, name='ticket_delete'),
+    path('flux/review_update', flux.views.update_review, name='review_update'),
+    path('flux/review_delete', flux.views.delete_review, name='review_delete'),
 
 
 ]
