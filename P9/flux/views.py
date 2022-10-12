@@ -46,35 +46,31 @@ def create_review(request):
            ticket.save()
            review = c_review_form.save(commit=False)
            review.user = request.user
+           review.ticket = ticket
            review.save()
            messages.success(request, "Critique sauvegardée avec succes!")
            return redirect('home')
     context = {
+        'c_ticket_form':c_ticket_form,
         'c_review_form': c_review_form,
             }
     return render(request, 'flux/review_create1.html', context=context)
 
 
+
 @login_required
-def subscription_page(request):
+def follow_users(request):
+    follow_form = forms.FollowUsersForm(instance=request.user)
+    if request.method == 'POST':
+        follow_form = forms.FollowUsersForm(request.POST, instance=request.user)
+        if follow_form.is_valid():
+            user_follow_form = follow_form.save()
+            # user_follow_form.follows.add(1,5,6,7)
+            return redirect('home')
     return render(request, 'flux/subscription.html')
 
-# @login_required
-# def create_ticket(request):
-#     c_ticket_form = forms.TicketFormC()
-#     if request.method == 'POST':
-#         c_ticket_form = forms.TicketFormC(request.POST)
-#         print(request.FILES)
-#         if c_ticket_form.is_valid():
-#            ticket = c_ticket_form.save(commit=False)
-#            ticket.author = request.user
-#            # c_ticket_form.cleaned_data["user"] = request.user
-#            ticket.save()
-#
-#
-#            messages.success(request, "Ticket sauveagradé avec success!")
-#         return redirect('home')
-#     context = {
-#         'c_ticket_form': c_ticket_form,
-#             }
-#     return render(request, 'flux/ticket_create.html', context=context)
+
+@login_required
+def post(request):
+    return render(request, 'flux/post.html')
+

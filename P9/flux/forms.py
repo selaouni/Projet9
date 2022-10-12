@@ -28,5 +28,8 @@ class ReviewFormC(ModelForm):
     # body = forms.CharField(max_length=8192, label="Commentaire")
 
 
-form = TicketFormC()
 
+class FollowUsersForm(ModelForm):
+    class Meta:
+        model = models.UserFollows
+        fields = ['followed_user']
