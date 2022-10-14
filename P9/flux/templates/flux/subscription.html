@@ -21,7 +21,7 @@
                     <p>
                         {{ f.followed_user }}
 
-                        <button type="submit" > Désabonner </button>
+                        <button> <a href="{% url 'unsubscribe' f.id %}" > Supprimer </a> </button>
                     </p>
                 </form>
             {% endfor %}

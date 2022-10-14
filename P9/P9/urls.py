@@ -37,13 +37,15 @@ urlpatterns = [
     path('logout/', authentication.views.logout_user, name='logout'),
     path('signup/', authentication.views.signup_page, name='signup'),
     path('flux/create_ticket', flux.views.create_ticket, name='ticket_create'),
-    path('flux/create_review', flux.views.create_review, name='review_create1'),
-    path('flux/subscribe', flux.views.follow_users, name='Subscription'),
+    path('flux/create_review', flux.views.create_review, name='review_create'),
+    path('flux/subscribe', flux.views.follow_users, name='subscription'),
     path('flux/post', flux.views.post, name='post'),
-    path('flux/ticket_update', flux.views.update_ticket, name='ticket_update'),
-    path('flux/ticket_delete', flux.views.delete_ticket, name='ticket_delete'),
-    path('flux/review_update', flux.views.update_review, name='review_update'),
-    path('flux/review_delete', flux.views.delete_review, name='review_delete'),
+    path('flux/<int:id>/update_ticket/', flux.views.update_ticket, name='ticket_update'),
+    path('flux/<int:id>/delete_ticket', flux.views.delete_ticket, name='ticket_delete'),
+    path('flux/<int:id>/update_review', flux.views.update_review, name='review_update'),
+    path('flux/<int:id>/delete_review', flux.views.delete_review, name='review_delete'),
+    path('flux/<int:id>/unsubscribe', flux.views.unsubscribe, name='unsubscribe'),
+
 
 
 ]
