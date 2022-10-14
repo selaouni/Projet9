@@ -139,9 +139,31 @@ def delete_review(request, id):
         'c_review_form': c_review_form,
     }
 
-    return render(request, 'flux/review_delete.html',context=context)
+    return render(request, 'flux/review_delete.html', context=context)
 
-
+@login_required
+def create_review_onticket(request,id):
+    obj = models.Ticket.objects.get(id=id)
+    c_ticket_form = forms.TicketFormC(instance=obj)
+    c_review_form = forms.ReviewFormC()
+    if request.method == 'POST':
+        c_ticket_form = forms.TicketFormC(request.POST, request.FILES,instance=obj)
+        c_review_form = forms.ReviewFormC(request.POST)
+        if all([c_ticket_form.is_valid(), c_review_form.is_valid()]):
+            ticket = c_ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            review = c_review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
+            messages.success(request, "Critique sauvegardée avec succes!")
+            return redirect('home')
+    context = {
+        'c_ticket_form': c_ticket_form,
+        'c_review_form': c_review_form,
+    }
+    return render(request, 'flux/create_review_onticket.html', context=context)
 @login_required
 def post(request):
     review = models.Review.objects.select_related("ticket").filter(Q(user=request.user))
@@ -163,7 +185,7 @@ def follow_users(request):
             form_follow.save()
 
     following = models.UserFollows.objects.select_related("user").filter(Q(user=request.user))
-    followed = models.UserFollows.objects.select_related("followed_user").filter(Q(user=request.user))
+    followed = models.UserFollows.objects.filter(followed_user=request.user)
 
     context = {
         "follow_form": follow_form,
