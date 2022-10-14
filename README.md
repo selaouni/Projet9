@@ -47,6 +47,6 @@ une critique de livres à la demande.
 - https://prograide.com/pregunta/61054/comment-inclure-des-fichiers-image-dans-les-modeles-django
 - https://developer.mozilla.org/fr/docs/Learn/Server-side/Django/Home_page
 - https://iancarpenter.dev/2021/09/19/django-object-has-no-attribute-save/
-- https://
+- https://www.youtube.com/watch?v=YyShrxl-Juo
 - https://
 - Discord DA python

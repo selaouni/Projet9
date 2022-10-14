@@ -4,8 +4,8 @@
 <html>
     <head>
         <title> Base </title>
-        <link rel="stylesheet" href="{% static 'styles.css' %}" />
-        <img src="{% static 'P9/logo.jpg' %}"  style="width:555px;height:540px;">
+<!--        <link rel="stylesheet" href="{% static 'styles.css' %}" />-->
+<!--        <img src="{% static 'P9/logo.jpg' %}"  style="width:555px;height:540px;">-->
 
     </head>
     <body>
@@ -16,9 +16,9 @@
                <a href="{% url 'home' %}">-- Flux -</a>
                <a href="{% url 'post' %}"> - Mes posts-  </a>
 
-               <a href="{% url 'Subscription' %}"> - Abonnemements - </a>
+               <a href="{% url 'subscription' %}"> - Abonnemements - </a>
                <a href="{% url 'ticket_create' %}"> - Créer un ticket - </a>
-               <a href="{% url 'review_create1' %}"> - Créer une critique -</a>
+               <a href="{% url 'review_create' %}"> - Créer une critique -</a>
                 <a href="{% url 'logout' %}">- Se déconnecter --</a>
                 <br>
                 <br>

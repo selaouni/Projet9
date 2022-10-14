@@ -28,23 +28,32 @@
               {% block content %}
 
              <button>  <a href="{% url 'ticket_create' %}" > Demander une critique </a> </button>
-             <button>  <a href="{% url 'review_create1' %}" > Créer une critique</a> </button>
+             <button>  <a href="{% url 'review_create' %}" > Créer une critique</a> </button>
                 <h2> Votre flux </h2>
+                <p>___________________________________________________________________</p>
                     {% for f in flux_ticket %}
                         <p>{{ f.time_created }}</p>
-                        <p>{{ f.user }} a demandé une critique </p>
+                        <h4>{{ f.user }} a demandé une critique </h4>
                         <p>{{ f.title }}</p>
                         <p>{{ f.description }}</p>
                         <img src="{{ f.image.url }}">
+                        <br>
+                        <button>  <a href="{% url 'create_review_onticket' f.id %}"> Créer une critique </a> </button>
                         <p>___________________________________________________________________</p>
 
                     {% endfor %}
-<!--                    {% for f in flux_review %}-->
-<!--                        <p>{{ f.time_created }}</p>-->
-<!--                        <p>{{ f.user }} a publié une critique </p>-->
-<!--                        <p>{{ f.rating }}</p>-->
+                    {% for f in flux_review %}
+                        <p>{{ f.time_created }}</p>
+                        <h4>{{ f.user }} a publié une critique </h4>
+                        <p>Rating :{{ f.rating }}/5</p>
+                        <p>{{ f.body }}</p>
+                        <p>______________________________</p>
+                        <p>{{ f.ticket.title }}</p>
+                        <p>{{ f.ticket.description }}</p>
+                        <img src="{{ f.ticket.image.url }}">
+                        <p>___________________________________________________________________</p>
 
-<!--                    {% endfor %}-->
+                    {% endfor %}
 
 
              {% endblock content%}
