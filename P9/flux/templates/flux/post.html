@@ -7,7 +7,7 @@
 <body>
     {% extends 'base.html' %}
     {% block content %}
-        <h2> Vos posts </h2>
+        <h2> Mes posts </h2>
         <p>___________________________________________________________________</p>
         <div class="create-ticket">
 
@@ -19,8 +19,8 @@
                     <p>{{ post.description }}</p>
                     <img src="{{ post.image.url }}">
                     <br>
-                    <button>  <a href="{% url 'ticket_update' %}" > Modifier </a> </button>
-                    <button>  <a href="{% url 'ticket_delete' %}" > Supprimer </a> </button>
+                    <button>  <a href="{% url 'ticket_update' post.id %}"> Modifier </a> </button>
+                    <button>  <a href="{% url 'ticket_delete' post.id %}" > Supprimer </a> </button>
                     <p>___________________________________________________________________</p>
                 {% elif post.content_type == 'REVIEW' %}
                     <p>{{ post.time_created }}</p>
@@ -28,8 +28,8 @@
                     <p> Rating : {{ post.rating }}/ 5 </p>
                     <p>{{ post.headline }}</p>
                     <p>{{ post.body }}</p>
-                    <button>  <a href="{% url 'review_update' %}" > Modifier </a> </button>
-                    <button>  <a href="{% url 'review_delete' %}" > Supprimer </a> </button>
+                    <button>  <a href="{% url 'review_update' post.id %}" > Modifier </a> </button>
+                    <button>  <a href="{% url 'review_delete' post.id %}" > Supprimer </a> </button>
                     <p>___________________________________________________________________</p>
                 {% endif %}
             {% endfor %}

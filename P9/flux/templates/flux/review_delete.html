@@ -2,15 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Suppression critique</title>
 </head>
 <body>
     {% extends 'base.html' %}
     {% block content %}
     <h2> Suppression D'une critique</h2>
-    <P> Message info : la critique a été supprimée avec succes</P>
+    <p>Etes-vous sûr de vouloir supprimer cette critique ?</p>
+        <form action="" method="POST">
+            {{ c_ticket_form.as_p }}
+            {{ c_review_form.as_p }}
+            {% csrf_token %}
+            <button type="submit" > Supprimer </button>
+<!--            <P> Message info : la critique a été supprimée avec succes</P>-->
+        </form>
+
 
     {% endblock content %}
 
 </body>
 </html>
+
