@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Affichage ticket</title>
+</head>
+<body>
+
+    <div class="create-ticket">
+
+        {% block content %}
+                <p>___________________________________________________________________</p>
+                <p>Début snippet</p>
+
+                        {% block title %}
+
+                        <p>{{ obj.time_created }}</p>
+                        <h4>{{ obj.user }} a demandé une critique </h4>
+                        <p>{{ obj.title }}</p>
+                        <p>{{ obj.description }}</p>
+                        <img src="{{ obj.image.url }}">
+
+
+                        {% endblock %}
+
+
+                <p>Fin snippet</p>
+                <p>___________________________________________________________________</p>
+
+
+        {% endblock content %}
+    </div>
+</body>
+</html>

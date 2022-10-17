@@ -14,20 +14,33 @@
             {% for post in posts %}
                 {% if post.content_type == 'TICKET' %}
                     <p>{{ post.time_created }}</p>
-                    <p> Vous avez demandé une critique </p>
+                    <h4>Vous avez publié un ticket</h4>
                     <p>{{ post.title }}</p>
                     <p>{{ post.description }}</p>
                     <img src="{{ post.image.url }}">
                     <br>
+                    <br>
                     <button>  <a href="{% url 'ticket_update' post.id %}"> Modifier </a> </button>
                     <button>  <a href="{% url 'ticket_delete' post.id %}" > Supprimer </a> </button>
-                    <p>___________________________________________________________________</p>
+                <p>___________________________________________________________________</p>
                 {% elif post.content_type == 'REVIEW' %}
                     <p>{{ post.time_created }}</p>
                     <p> Vous avez publié une critique </p>
                     <p> Rating : {{ post.rating }}/ 5 </p>
                     <p>{{ post.headline }}</p>
                     <p>{{ post.body }}</p>
+                    <p>______________________________</p>
+
+                    {% if post.user == user %}
+                        <p>Ticket - Vous</p>
+                    {% elif post.user != user %}
+                        <p>Ticket {{ post.ticket.user }}</p>
+                    {% endif %}
+                    <p>{{ post.ticket.title }}</p>
+                    <p>{{ post.ticket.description }}</p>
+                    <img src="{{ post.ticket.image.url }}">
+                    <br>
+                    <br>
                     <button>  <a href="{% url 'review_update' post.id %}" > Modifier </a> </button>
                     <button>  <a href="{% url 'review_delete' post.id %}" > Supprimer </a> </button>
                     <p>___________________________________________________________________</p>

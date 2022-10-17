@@ -28,31 +28,42 @@
               {% block content %}
 
              <button>  <a href="{% url 'ticket_create' %}" > Demander une critique </a> </button>
-             <button>  <a href="{% url 'review_create' %}" > Créer une critique</a> </button>
+             <button>  <a href="{% url 'review_create' %}" > Créer une critique </a> </button>
                 <h2> Votre flux </h2>
-                <p>___________________________________________________________________</p>
-                    {% for f in flux_ticket %}
-                        <p>{{ f.time_created }}</p>
-                        <h4>{{ f.user }} a demandé une critique </h4>
-                        <p>{{ f.title }}</p>
-                        <p>{{ f.description }}</p>
-                        <img src="{{ f.image.url }}">
-                        <br>
-                        <button>  <a href="{% url 'create_review_onticket' f.id %}"> Créer une critique </a> </button>
-                        <p>___________________________________________________________________</p>
+                <p>___________________________________________________________________________________</p>
+                    {% for f in posts %}
+                        {% if f.content_type == 'TICKET' %}
+                            <p>{{ f.time_created }}</p>
+                            {% if f.user == user %}
+                                <h4>Vous avez publié un ticket </h4>
+                            {% elif f.user != user %}
+                                <h4>{{ f.user }} a demandé une critique </h4>
+                            {% endif %}
+                            <p>{{ f.title }}</p>
+                            <p>{{ f.description }}</p>
+                            <img src="{{ f.image.url }}">
+                            <br>
+                                {% if f.user != user %}
+                                    <button><a href="{% url 'create_review_onticket' f.id %}"> Créer une critique </a> </button>
+                                {% endif %}
+                        <p>___________________________________________________________________________________</p>
+                        {% elif f.content_type == 'REVIEW' %}
+                            <p>{{ f.time_created }}</p>
+                            {% if f.user == user %}
+                                <h4>Vous avez publié une critique </h4>
+                            {% elif f.user != user %}
+                                <h4>{{ f.user }} a publié une critique </h4>
+                            {% endif %}
 
-                    {% endfor %}
-                    {% for f in flux_review %}
-                        <p>{{ f.time_created }}</p>
-                        <h4>{{ f.user }} a publié une critique </h4>
-                        <p>Rating :{{ f.rating }}/5</p>
-                        <p>{{ f.body }}</p>
-                        <p>______________________________</p>
-                        <p>{{ f.ticket.title }}</p>
-                        <p>{{ f.ticket.description }}</p>
-                        <img src="{{ f.ticket.image.url }}">
-                        <p>___________________________________________________________________</p>
-
+                            <p>Rating :{{ f.rating }}/5</p>
+                            <p>{{ f.body }}</p>
+                            <p>______________________________</p>
+                            <p>Ticket {{ f.ticket.user }}</p>
+                            <p>{{ f.ticket.title }}</p>
+                            <p>{{ f.ticket.description }}</p>
+                            <img src="{{ f.ticket.image.url }}">
+                        <p>___________________________________________________________________________________</p>
+                        {% endif %}
                     {% endfor %}
 
 
