@@ -1,22 +1,26 @@
 <!DOCTYPE html>
+{% extends 'flux/base.html' %}
 <html lang="en">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
     <meta charset="UTF-8">
     <title>Suppression ticket</title>
 </head>
 <body>
-    {% extends 'base.html' %}
     {% block content %}
     <h2> Suppression D'un ticket</h2>
-    <p>Etes-vous sûr de vouloir supprimer ce ticket ?</p>
+    <div class="stdr_frame">
+        <p>Etes-vous sûr de vouloir supprimer ce ticket ?</p>
 
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ c_ticket_form.as_p }}
-        <button type="submit" value="Delete" >Supprimer</button>
-<!--        <P> Message info : le ticket a été supprimé avec succes</P>-->
-    </form>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ c_ticket_form.as_p }}
+            <br>
+            <button type="submit" value="Delete" >Supprimer</button>
 
+        </form>
+    </div>
     {% endblock content %}
 
 </body>

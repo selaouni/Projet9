@@ -1,20 +1,25 @@
 <!DOCTYPE html>
+{% extends 'flux/base.html' %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Création de ticket</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
 </head>
 <body>
   <div class="ticketCreation">
-    {% extends 'base.html' %}
+
     {% block content %}
         <h2> Créer un ticket </h2>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ c_ticket_form.as_p }}
+            <div class="stdr_frame">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ c_ticket_form.as_p }}
 
-            <button type="submit" > Envoyer </button>
-        </form>
+                    <button type="submit" > Envoyer </button>
+                </form>
+            </div>
     {% endblock content %}
   </div>
 </body>

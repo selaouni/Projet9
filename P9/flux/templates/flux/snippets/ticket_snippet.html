@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
     <meta charset="UTF-8">
     <title>Affichage ticket</title>
 </head>
@@ -9,23 +11,15 @@
     <div class="create-ticket">
 
         {% block content %}
-                <p>___________________________________________________________________</p>
-                <p>Début snippet</p>
-
+                <div class="small_frame">
                         {% block title %}
-
                         <p>{{ obj.time_created }}</p>
                         <h4>{{ obj.user }} a demandé une critique </h4>
                         <p>{{ obj.title }}</p>
                         <p>{{ obj.description }}</p>
                         <img src="{{ obj.image.url }}">
-
-
                         {% endblock %}
-
-
-                <p>Fin snippet</p>
-                <p>___________________________________________________________________</p>
+                </div>
 
 
         {% endblock content %}

@@ -1,4 +1,7 @@
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
+
     <meta charset="UTF-8">
     <title>Affichage ticket</title>
 </head>
@@ -7,7 +10,7 @@
     <div class="create-ticket">
 
         {% block content %}
-                <p>___________________________________________________________________</p>
+                <div class="small_frame">
                         {% block title %}
                         <p>{{ obj.ticket.time_created }}</p>
                         <h4>{{ obj.ticket.user }} a demandé une critique </h4>
@@ -15,7 +18,7 @@
                         <p>{{ obj.ticket.description }}</p>
                         <img src="{{ obj.ticket.image.url }}">
                         {% endblock %}
-                <p>___________________________________________________________________</p>
+                </div>
 
 
 

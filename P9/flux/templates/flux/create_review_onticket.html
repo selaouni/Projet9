@@ -1,26 +1,28 @@
 <!DOCTYPE html>
+{% extends 'flux/base.html' %}
 <html lang="en">
 <head>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
     <meta charset="UTF-8">
     <title>Créer une critique</title>
 </head>
 <body>
 <div class="reviewCreation">
-    {% extends 'base.html' %}
-    {% block content %}
 
+    {% block content %}
+        <div class="stdr_frame">
         <h2> Créer une critique </h2>
         <p>Vous êtes en train de poster en réponse à : </p>
 
         {% include "flux/snippets/ticket_snippet.html" with var=obj %}
         <form method="post" enctype="multipart/form-data">
-            {{ c_ticket_form.as_p }}
-            <p>__________________________________________________________________ </p>
             <p>Ajouter votre critique :</p>
             {{ c_review_form.as_p }}
             {% csrf_token %}
             <button type="submit" > Envoyer </button>
         </form>
+        </div>
     {% endblock content %}
 
 

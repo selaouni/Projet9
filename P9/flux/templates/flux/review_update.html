@@ -1,12 +1,15 @@
 <!DOCTYPE html>
+{% extends 'flux/base.html' %}
 <html lang="en">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
     <meta charset="UTF-8">
     <title>Mise à jour critique</title>
 </head>
 <body>
-    <div class="create-ticket">
-        {% extends 'base.html' %}
+    <div class="stdr_frame">
+        {% extends 'flux/base.html' %}
         {% block content %}
          <h2> Modifier votre critique</h2>
             <p>Vous êtes en train de poster en réponse à : </p>

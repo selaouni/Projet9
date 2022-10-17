@@ -4,15 +4,13 @@
 <html>
     <head>
         <title> Base </title>
-<!--        <link rel="stylesheet" href="{% static 'styles.css' %}" />-->
-<!--        <img src="{% static 'P9/logo.jpg' %}"  style="width:555px;height:540px;">-->
-
+        <link rel="stylesheet" href="{% static 'flux/styles.css' %}" />
     </head>
     <body>
-
+        <img src="{% static 'flux/logo1.jpg' %}"  style="width:100px;height:100px;">
         <h1>LITReview </h1>
             {% block sidebar %}
-            <div class="sidebar-nav">
+            <div class="bar-nav">
                <a href="{% url 'home' %}">-- Flux -</a>
                <a href="{% url 'post' %}"> - Mes posts-  </a>
 
@@ -27,7 +25,8 @@
            </div>
             <!-- insert default navigation text for every page -->
             {% endblock %}
-            {% block content %}{% endblock content %}
+            {% block content %}
+            {% endblock content %}
             {%  if user.is_authenticated %}
                 <p>Vous êtes connecté en tant que {{ request.user }}. <a href="{% url 'logout' %}">Se déconnecter</a></p>
             {% endif %}

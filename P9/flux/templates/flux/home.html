@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-{% extends 'base.html' %}
+{% extends 'flux/base.html' %}
 {% load static %}
 <html lang="en">
 
-{% load flux_extras %}
+
 
 <head>
 
@@ -17,22 +17,25 @@
 
 
 
+
 </head>
 <body>
 
 
 
-  <div class="container-fluid">
-    <div class="row">
+
          <div class="mon-flux">
               {% block content %}
 
              <button>  <a href="{% url 'ticket_create' %}" > Demander une critique </a> </button>
              <button>  <a href="{% url 'review_create' %}" > Créer une critique </a> </button>
-                <h2> Votre flux </h2>
-                <p>___________________________________________________________________________________</p>
+                <h2> Mon flux </h2>
+                <div class="stdr_frame">
+
                     {% for f in posts %}
+
                         {% if f.content_type == 'TICKET' %}
+                            <div class="stdr_frame">
                             <p>{{ f.time_created }}</p>
                             {% if f.user == user %}
                                 <h4>Vous avez publié un ticket </h4>
@@ -45,9 +48,12 @@
                             <br>
                                 {% if f.user != user %}
                                     <button><a href="{% url 'create_review_onticket' f.id %}"> Créer une critique </a> </button>
+
                                 {% endif %}
-                        <p>___________________________________________________________________________________</p>
+                            </div>
+
                         {% elif f.content_type == 'REVIEW' %}
+                        <div class="stdr_frame">
                             <p>{{ f.time_created }}</p>
                             {% if f.user == user %}
                                 <h4>Vous avez publié une critique </h4>
@@ -57,20 +63,20 @@
 
                             <p>Rating :{{ f.rating }}/5</p>
                             <p>{{ f.body }}</p>
-                            <p>______________________________</p>
+                            <div class="small_frame">
                             <p>Ticket {{ f.ticket.user }}</p>
                             <p>{{ f.ticket.title }}</p>
                             <p>{{ f.ticket.description }}</p>
                             <img src="{{ f.ticket.image.url }}">
-                        <p>___________________________________________________________________________________</p>
+                            </div>
+                        </div>
+
                         {% endif %}
                     {% endfor %}
 
-
+                </div>
              {% endblock content%}
          </div>
-    </div>
-  </div>
 </body>
 
 

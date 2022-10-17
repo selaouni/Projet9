@@ -27,8 +27,6 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', authentication.views.login_page, name='login'),
-    #path('', authentication.views.LoginPageView.as_view(), name='login'),
     path('', LoginView.as_view(
                 template_name='authentication/login.html',
                 redirect_authenticated_user=True),

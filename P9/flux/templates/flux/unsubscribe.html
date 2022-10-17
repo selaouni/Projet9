@@ -1,22 +1,25 @@
 <!DOCTYPE html>
+{% extends 'flux/base.html' %}
 <html lang="en">
 <head>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
     <meta charset="UTF-8">
     <title>unsubscribe</title>
 </head>
 <body>
-    {% extends 'base.html' %}
+
     {% block content %}
-    <h2> désabonnement</h2>
-    <p>Etes-vous sûr de vouloir supprimer cette abonnement?</p>
+    <h2> Désabonnement</h2>
+    <div class="stdr_frame">
+        <p>Etes-vous sûr de vouloir supprimer cette abonnement?</p>
 
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ follow_form.as_p }}
-        <button type="submit" value="Delete" >Se désabonner</button>
-<!--        <P> Message info : le ticket a été supprimé avec succes</P>-->
-    </form>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ follow_form.as_p }}
+            <button type="submit" value="Delete" >Se désabonner</button>
 
+        </form>
     {% endblock content %}
 
 </body>

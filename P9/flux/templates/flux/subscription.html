@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Abonnement</title>
 </head>
-    {% extends 'base.html' %}
+    {% extends 'flux/base.html' %}
     {% block content %}
         <h2> Suivre d'autres utilisateurs </h2>
         <form method="post" enctype="multipart/form-data">
@@ -20,7 +20,6 @@
                     {% csrf_token %}
                     <p>
                         {{ f.followed_user }}
-
                         <button> <a href="{% url 'unsubscribe' f.id %}" > Se désabonner </a> </button>
                     </p>
                 </form>
