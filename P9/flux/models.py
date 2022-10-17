@@ -13,7 +13,7 @@ class Ticket(models.Model):
     image = models.ImageField(null=True, blank=True)
     time_created = models.fields.DateTimeField(auto_now_add=True)
 
-    IMAGE_MAX_SIZE = (400, 400)
+    IMAGE_MAX_SIZE = (200, 200)
     def resize_image(self):
         image = Image.open(self.image)
         image.thumbnail(self.IMAGE_MAX_SIZE)
