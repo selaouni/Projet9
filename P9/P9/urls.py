@@ -47,6 +47,8 @@ urlpatterns = [
     path('flux/<int:id>/unsubscribe', flux.views.unsubscribe, name='unsubscribe'),
     path('flux/<int:id>/create_review_onticket', flux.views.create_review_onticket, name='create_review_onticket'),
 
+
+
 ]
 # code pour flux
 if settings.DEBUG:
