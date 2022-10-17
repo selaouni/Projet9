@@ -106,14 +106,10 @@ def delete_ticket(request, id):
 @login_required
 def update_review(request,id):
     obj = models.Review.objects.get(id=id)
-    # c_ticket_form = forms.TicketFormC(instance=obj)
     c_review_form = forms.ReviewFormC(instance=obj)
     if request.method == 'POST':
-        # c_ticket_form = forms.TicketFormC(request.POST,request.FILES, instance=obj)
         c_review_form = forms.ReviewFormC(request.POST, instance=obj)
-        # if all([c_ticket_form.is_valid(), c_review_form.is_valid()]):
         if c_review_form.is_valid():
-            # ticket = c_ticket_form.save(commit=False)
             review = c_review_form.save(commit=False)
             review.user = request.user
             review.ticket = obj
@@ -127,11 +123,10 @@ def update_review(request,id):
 
     return render(request, 'flux/review_update.html', context=context)
 
-
 @login_required
 def delete_review(request, id):
     obj = models.Review.objects.get(id=id)
-    c_ticket_form = forms.TicketFormC(instance=obj)
+    # c_ticket_form = forms.TicketFormC(instance=obj)
     c_review_form = forms.ReviewFormC(instance=obj)
     if request.method == 'POST':
         obj.delete()
@@ -139,7 +134,8 @@ def delete_review(request, id):
         return redirect('post')
 
     context = {
-        'c_ticket_form': c_ticket_form,
+        # 'c_ticket_form': c_ticket_form,
+        "obj": obj,
         'c_review_form': c_review_form,
     }
     return render(request, 'flux/review_delete.html', context=context)

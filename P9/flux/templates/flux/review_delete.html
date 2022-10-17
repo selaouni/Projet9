@@ -9,8 +9,8 @@
     {% block content %}
     <h2> Suppression D'une critique</h2>
     <p>Etes-vous sûr de vouloir supprimer cette critique ?</p>
+    {% include "flux/snippets/review_snippet.html" with var=obj %}
         <form action="" method="POST">
-            {{ c_ticket_form.as_p }}
             {{ c_review_form.as_p }}
             {% csrf_token %}
             <button type="submit" > Supprimer </button>
