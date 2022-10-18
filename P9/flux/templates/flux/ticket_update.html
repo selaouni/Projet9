@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 {% extends 'flux/base.html' %}
+{% load static %}
 <html lang="en">
 <head>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
+    <link rel="stylesheet" href="{% static 'flux/styles.css' %}">
     <meta charset="UTF-8">
     <title>Mise à jour ticket</title>
 </head>
@@ -14,15 +15,14 @@
         {% block content %}
         <h2> Modifier votre ticket</h2>
             <div class="stdr_frame">
-                <form action="" method="POST">
+                <form action="" method="POST" enctype="multipart/form-data">
 
-                        <p>Title {{ c_ticket_form.title }}</p>
-                        <p>Description {{ c_ticket_form.description }}</p>
-                        <p> Image </p>
-                        <img src="{{ c_ticket_form.image }}">
+                        {{ ticket_form.as_p }}
+                        <img src="{{ c_ticket_form.image.value.url}}">
 
 
                     {% csrf_token %}
+                    <br>
                     <br>
                     <button type="submit" value="Update" >Modifier</button>
                 </form>
