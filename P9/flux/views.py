@@ -5,10 +5,7 @@ from . import models
 from django.contrib import messages
 from itertools import chain
 from django.db.models import CharField, Value, Q
-from django.http import HttpResponse
-from django.template import loader
-from django.views.generic.edit import DeleteView
-from django.urls import reverse_lazy
+
 
 
 
@@ -21,7 +18,6 @@ def home(request):
 
     review = models.Review.objects.all()
     review = review.annotate(content_type=Value("REVIEW", CharField()))
-    # ticket = models.Ticket.objects.all()
     ticket = models.Ticket.objects.exclude(id__in=review.values("ticket_id"))
     ticket = ticket.annotate(content_type=Value("TICKET", CharField()))
     posts = sorted(chain(review, ticket), key=lambda post: (post.time_created), reverse=True)
@@ -33,59 +29,58 @@ def home(request):
 
 @login_required
 def create_ticket(request):
-    c_ticket_form = forms.TicketFormC()
+    ticket_form = forms.TicketForm()
     if request.method == 'POST':
-        c_ticket_form = forms.TicketFormC(request.POST, request.FILES)
-        # print(request.FILES)
-        if c_ticket_form.is_valid():
-           ticket = c_ticket_form.save(commit=False)
+        ticket_form = forms.TicketForm(request.POST, request.FILES)
+        if ticket_form.is_valid():
+           ticket = ticket_form.save(commit=False)
            ticket.user = request.user
            ticket.save()
            messages.success(request, "Ticket sauvegardé avec succes!")
            return redirect('home')
     context = {
-        'c_ticket_form': c_ticket_form,
+        'ticket_form': ticket_form,
             }
     return render(request, 'flux/ticket_create.html', context=context)
 
 
 @login_required
 def create_review(request):
-    c_ticket_form = forms.TicketFormC()
-    c_review_form = forms.ReviewFormC()
+    ticket_form = forms.TicketForm()
+    review_form = forms.ReviewForm()
     if request.method == 'POST':
-        c_ticket_form = forms.TicketFormC(request.POST, request.FILES)
-        c_review_form = forms.ReviewFormC(request.POST)
-        if all([c_ticket_form.is_valid(), c_review_form.is_valid()]):
-           ticket = c_ticket_form.save(commit=False)
+        ticket_form = forms.TicketForm(request.POST, request.FILES)
+        review_form = forms.ReviewForm(request.POST)
+        if all([ticket_form.is_valid(), review_form.is_valid()]):
+           ticket = ticket_form.save(commit=False)
            ticket.user = request.user
            ticket.save()
-           review = c_review_form.save(commit=False)
+           review = review_form.save(commit=False)
            review.user = request.user
            review.ticket = ticket
            review.save()
            messages.success(request, "Critique sauvegardée avec succes!")
            return redirect('home')
     context = {
-        'c_ticket_form':c_ticket_form,
-        'c_review_form': c_review_form,
+        'ticket_form':ticket_form,
+        'review_form': review_form,
             }
     return render(request, 'flux/review_create.html', context=context)
 
 @login_required
 def update_ticket(request,id):
     obj = models.Ticket.objects.get(id=id)
-    c_ticket_form = forms.TicketFormC(instance=obj)
+    ticket_form = forms.TicketForm(instance=obj)
     if request.method == 'POST':
-        c_ticket_form = forms.TicketFormC(request.POST, request.FILES, instance=obj)
-        if c_ticket_form.is_valid():
-            ticket = c_ticket_form.save(commit=False)
+        ticket_form = forms.TicketForm(request.POST, request.FILES, instance=obj)
+        if ticket_form.is_valid():
+            ticket = ticket_form.save(commit=False)
             ticket.user = request.user
             ticket.save()
             messages.success(request, "Ticket modifié avec succes!")
             return redirect('home')
     context = {
-        'c_ticket_form': c_ticket_form,
+        'ticket_form': ticket_form,
     }
     return render(request, 'flux/ticket_update.html', context=context)
 
@@ -93,32 +88,33 @@ def update_ticket(request,id):
 @login_required
 def delete_ticket(request, id):
     obj = models.Ticket.objects.get(id=id)
-    c_ticket_form = forms.TicketFormC(instance=obj)
+    ticket_form = forms.TicketForm(instance=obj)
     if request.method == 'POST':
         obj.delete()
         messages.success(request, "Ticket supprimé avec succes!")
         return redirect('post')
     context = {
-        'c_ticket_form': c_ticket_form,
+        'ticket_form': ticket_form,
     }
     return render(request, 'flux/ticket_delete.html', context=context)
 
 @login_required
 def update_review(request,id):
     obj = models.Review.objects.get(id=id)
-    c_review_form = forms.ReviewFormC(instance=obj)
+    review_form = forms.ReviewForm(instance=obj)
     if request.method == 'POST':
-        c_review_form = forms.ReviewFormC(request.POST, instance=obj)
-        if c_review_form.is_valid():
-            review = c_review_form.save(commit=False)
+        review_form = forms.ReviewForm(request.POST, instance=obj)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
             review.user = request.user
-            review.ticket = obj
+            review.ticket = obj.ticket
             review.save()
             messages.success(request, "Critique modifiée avec succes!")
             return redirect('home')
     context = {
         "obj": obj,
-        'c_review_form': c_review_form,
+        'review_form': review_form,
+
     }
 
     return render(request, 'flux/review_update.html', context=context)
@@ -126,28 +122,26 @@ def update_review(request,id):
 @login_required
 def delete_review(request, id):
     obj = models.Review.objects.get(id=id)
-    # c_ticket_form = forms.TicketFormC(instance=obj)
-    c_review_form = forms.ReviewFormC(instance=obj)
+    review_form = forms.ReviewForm(instance=obj)
     if request.method == 'POST':
         obj.delete()
         messages.success(request, "Review supprimée avec succes!")
         return redirect('post')
 
     context = {
-        # 'c_ticket_form': c_ticket_form,
         "obj": obj,
-        'c_review_form': c_review_form,
+        'review_form': review_form,
     }
     return render(request, 'flux/review_delete.html', context=context)
 
 @login_required
 def create_review_onticket(request,id):
     obj = models.Ticket.objects.get(id=id)
-    c_review_form = forms.ReviewFormC()
+    review_form = forms.ReviewForm()
     if request.method == 'POST':
-        c_review_form = forms.ReviewFormC(request.POST)
-        if c_review_form.is_valid():
-            review = c_review_form.save(commit=False)
+        review_form = forms.ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
             review.user = request.user
             review.ticket = obj
             review.save()
@@ -155,7 +149,7 @@ def create_review_onticket(request,id):
             return redirect('home')
     context = {
         "obj": obj,
-        'c_review_form': c_review_form,
+        'review_form': review_form,
     }
     return render(request, 'flux/create_review_onticket.html', context=context)
 @login_required
