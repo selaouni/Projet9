@@ -16,12 +16,9 @@
         <h2> Modifier votre ticket</h2>
             <div class="stdr_frame">
                 <form action="" method="POST" enctype="multipart/form-data">
-
+                        {% csrf_token %}
                         {{ ticket_form.as_p }}
-                        <img src="{{ c_ticket_form.image.value.url}}">
-
-
-                    {% csrf_token %}
+                        <img src="{{ ticket_form.image.value.url }}">
                     <br>
                     <br>
                     <button type="submit" value="Update" >Modifier</button>

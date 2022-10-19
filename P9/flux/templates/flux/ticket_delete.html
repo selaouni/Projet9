@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 {% extends 'flux/base.html' %}
+{% load static %}
 <html lang="en">
 <head>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
+    <link rel="stylesheet" href="{% static 'flux/styles.css' %}">
     <meta charset="UTF-8">
     <title>Suppression ticket</title>
 </head>
@@ -15,7 +15,7 @@
 
         <form action="" method="post">
             {% csrf_token %}
-            {{ c_ticket_form.as_p }}
+            {{ ticket_form.as_p }}
             <br>
             <button type="submit" value="Delete" >Supprimer</button>
 

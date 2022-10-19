@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-{% extends 'flux/base.html' %}
 {% load static %}
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'flux/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'authentication/styles.css' %}" />
     <meta charset="UTF-8">
     <title>Inscription</title>
 </head>
 <body>
-
+    <img src="{% static 'flux/logo1.jpg' %}"  style="width:100px;height:100px;">
+    <div class="sin_up">
       {% block content %}
         <h2>Sign up : </h2>
         {% if form.errors %}
@@ -19,6 +19,7 @@
           {% csrf_token %}
           <button type="submit" >S’inscrire</button>
         </form>
+    </div>
       {% endblock content %}
 
 </body>

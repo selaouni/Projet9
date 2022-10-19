@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+{% extends 'flux/base.html' %}
+{% load static %}
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{% static 'flux/styles.css' %}">
     <meta charset="UTF-8">
     <title>Post</title>
 </head>
 <body>
-    {% extends 'flux/base.html' %}
     {% block content %}
         <h2> Mes posts </h2>
         <div class="stdr_frame">

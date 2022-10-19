@@ -7,15 +7,8 @@ from itertools import chain
 from django.db.models import CharField, Value, Q
 
 
-
-
-
-
-# Create your views here.
-
 @login_required
 def home(request):
-
     review = models.Review.objects.all()
     review = review.annotate(content_type=Value("REVIEW", CharField()))
     ticket = models.Ticket.objects.exclude(id__in=review.values("ticket_id"))
@@ -26,21 +19,18 @@ def home(request):
     return render(request, 'flux/home.html', context=context)
 
 
-
 @login_required
 def create_ticket(request):
     ticket_form = forms.TicketForm()
     if request.method == 'POST':
         ticket_form = forms.TicketForm(request.POST, request.FILES)
         if ticket_form.is_valid():
-           ticket = ticket_form.save(commit=False)
-           ticket.user = request.user
-           ticket.save()
-           messages.success(request, "Ticket sauvegardé avec succes!")
-           return redirect('home')
-    context = {
-        'ticket_form': ticket_form,
-            }
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            messages.success(request, "Ticket sauvegardé avec succes!")
+            return redirect('home')
+    context = {'ticket_form': ticket_form, }
     return render(request, 'flux/ticket_create.html', context=context)
 
 
@@ -52,23 +42,24 @@ def create_review(request):
         ticket_form = forms.TicketForm(request.POST, request.FILES)
         review_form = forms.ReviewForm(request.POST)
         if all([ticket_form.is_valid(), review_form.is_valid()]):
-           ticket = ticket_form.save(commit=False)
-           ticket.user = request.user
-           ticket.save()
-           review = review_form.save(commit=False)
-           review.user = request.user
-           review.ticket = ticket
-           review.save()
-           messages.success(request, "Critique sauvegardée avec succes!")
-           return redirect('home')
+            ticket = ticket_form.save(commit=False)
+            ticket.user = request.user
+            ticket.save()
+            review = review_form.save(commit=False)
+            review.user = request.user
+            review.ticket = ticket
+            review.save()
+            messages.success(request, "Critique sauvegardée avec succes!")
+            return redirect('home')
     context = {
-        'ticket_form':ticket_form,
+        'ticket_form': ticket_form,
         'review_form': review_form,
-            }
+    }
     return render(request, 'flux/review_create.html', context=context)
 
+
 @login_required
-def update_ticket(request,id):
+def update_ticket(request, id):
     obj = models.Ticket.objects.get(id=id)
     ticket_form = forms.TicketForm(instance=obj)
     if request.method == 'POST':
@@ -98,8 +89,9 @@ def delete_ticket(request, id):
     }
     return render(request, 'flux/ticket_delete.html', context=context)
 
+
 @login_required
-def update_review(request,id):
+def update_review(request, id):
     obj = models.Review.objects.get(id=id)
     review_form = forms.ReviewForm(instance=obj)
     if request.method == 'POST':
@@ -119,6 +111,7 @@ def update_review(request,id):
 
     return render(request, 'flux/review_update.html', context=context)
 
+
 @login_required
 def delete_review(request, id):
     obj = models.Review.objects.get(id=id)
@@ -134,8 +127,9 @@ def delete_review(request, id):
     }
     return render(request, 'flux/review_delete.html', context=context)
 
+
 @login_required
-def create_review_onticket(request,id):
+def create_review_onticket(request, id):
     obj = models.Ticket.objects.get(id=id)
     review_form = forms.ReviewForm()
     if request.method == 'POST':
@@ -152,6 +146,8 @@ def create_review_onticket(request,id):
         'review_form': review_form,
     }
     return render(request, 'flux/create_review_onticket.html', context=context)
+
+
 @login_required
 def post(request):
     review = models.Review.objects.select_related("ticket").filter(Q(user=request.user))
@@ -162,8 +158,10 @@ def post(request):
     context = {"posts": posts}
     return render(request, "flux/post.html", context=context)
 
+
 @login_required
 def follow_users(request):
+    # user = models.UserFollows.objects.get(username=request.POST["user"])
     follow_form = forms.FollowUsersForm()
     if request.method == 'POST':
         follow_form = forms.FollowUsersForm(request.POST)
@@ -179,9 +177,9 @@ def follow_users(request):
         "follow_form": follow_form,
         'following': following,
         'followed': followed,
+
     }
     return render(request, 'flux/subscription.html', context=context)
-
 
 
 @login_required
@@ -198,6 +196,3 @@ def unsubscribe(request, id):
 
     }
     return render(request, 'flux/unsubscribe.html', context=context)
-
-
-

@@ -10,19 +10,19 @@
         <img src="{% static 'flux/logo1.jpg' %}"  style="width:100px;height:100px;">
         <h1>LITReview </h1>
             {% block sidebar %}
-            <div class="bar-nav">
-               <a href="{% url 'home' %}">-- Flux -</a>
-               <a href="{% url 'post' %}"> - Mes posts-  </a>
 
-               <a href="{% url 'subscription' %}"> - Abonnemements - </a>
-               <a href="{% url 'ticket_create' %}"> - Créer un ticket - </a>
-               <a href="{% url 'review_create' %}"> - Créer une critique -</a>
-                <a href="{% url 'logout' %}">- Se déconnecter --</a>
+               <a href="{% url 'home' %}"> Flux  -</a>
+               <a href="{% url 'post' %}">  Mes posts  -</a>
+
+               <a href="{% url 'subscription' %}">  Abonnemements   -</a>
+               <a href="{% url 'ticket_create' %}">  Créer un ticket  -</a>
+               <a href="{% url 'review_create' %}">  Créer une critique  -</a>
+                <a href="{% url 'logout' %}"> Se déconnecter  </a>
                 <br>
                 <br>
                 <br>
 
-           </div>
+          
             <!-- insert default navigation text for every page -->
             {% endblock %}
             {% block content %}

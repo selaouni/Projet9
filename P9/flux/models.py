@@ -4,7 +4,7 @@ from django.db import models
 from six import python_2_unicode_compatible
 from PIL import Image
 
-# Create your models here.
+
 @python_2_unicode_compatible
 class Ticket(models.Model):
     title = models.fields.CharField(max_length=128)
@@ -14,11 +14,11 @@ class Ticket(models.Model):
     time_created = models.fields.DateTimeField(auto_now_add=True)
 
     IMAGE_MAX_SIZE = (200, 200)
+
     def resize_image(self):
         image = Image.open(self.image)
         image.thumbnail(self.IMAGE_MAX_SIZE)
         # sauvegarde de l’image redimensionnée dans le système de fichiers
-        # ce n’est pas la méthode save() du modèle !
         image.save(self.image.path)
 
     def save(self, *args, **kwargs):
@@ -28,8 +28,6 @@ class Ticket(models.Model):
         def __str__(self):
             return f'{self.title}'
 
-    # def save(self, *args, **kw):
-    #     super(TicketFormC, self).save(*args, **kw)
 
 @python_2_unicode_compatible
 class Review(models.Model):
@@ -43,16 +41,10 @@ class Review(models.Model):
 
 @python_2_unicode_compatible
 class UserFollows(models.Model):
-    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='following')
-    followed_user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='followed_by')
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE, related_name='following')
+    followed_user = models.ForeignKey(to=settings.AUTH_USER_MODEL,
+                                      on_delete=models.CASCADE, related_name='followed_by')
 
     class Meta:
         unique_together = ('user', 'followed_user',)
-
-
-
-
-ticket_obj = Ticket()
-review_obj = Review()
-
-

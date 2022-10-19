@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 {% extends 'flux/base.html' %}
+{% load static %}
 <html lang="en">
 <head>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
+    <link rel="stylesheet" href="{% static 'flux/styles.css' %}">
     <meta charset="UTF-8">
     <title>Suppression critique</title>
 
 </head>
 <body>
-    {% extends 'flux/base.html' %}
     {% block content %}
     <h2> Suppression D'une critique</h2>
     <div class="stdr_frame">
         <p>Etes-vous sûr de vouloir supprimer cette critique ?</p>
         {% include "flux/snippets/review_snippet.html" with var=obj %}
             <form action="" method="POST">
-                {{ c_review_form.as_p }}
+                {{ review_form.as_p }}
                 {% csrf_token %}
                 <button type="submit" > Supprimer </button>
 

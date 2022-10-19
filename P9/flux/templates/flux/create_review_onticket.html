@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 {% extends 'flux/base.html' %}
+{% load static %}
 <html lang="en">
 <head>
-     {% load static %}
-    <link rel="stylesheet" href="{% static 'flux/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'flux/styles.css' %}">
     <meta charset="UTF-8">
     <title>Créer une critique</title>
 </head>
@@ -18,7 +19,7 @@
         {% include "flux/snippets/ticket_snippet.html" with var=obj %}
         <form method="post" enctype="multipart/form-data">
             <p>Ajouter votre critique :</p>
-            {{ c_review_form.as_p }}
+            {{ review_form.as_p }}
             {% csrf_token %}
             <button type="submit" > Envoyer </button>
         </form>

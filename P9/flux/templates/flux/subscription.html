@@ -1,15 +1,22 @@
 <!DOCTYPE html>
+{% extends 'flux/base.html' %}
+{% load static %}
 <html lang="en">
 <head>
+
+    <link rel="stylesheet" href="{% static 'flux/styles.css' %}">
     <meta charset="UTF-8">
     <title>Abonnement</title>
 </head>
-    {% extends 'flux/base.html' %}
+
     {% block content %}
+
         <h2> Suivre d'autres utilisateurs </h2>
+        <div class="stdr_frame">
         <form method="post" enctype="multipart/form-data">
-            {{ follow_form.as_p }}
+            <p> User  {{ follow_form.followed_user }}</p>
             {% csrf_token %}
+
             <button type="submit" > Suivre </button>
         </form>
         <br>
@@ -30,6 +37,7 @@
                 <p>{{ f.user }}</p>
             {% endfor %}
         <br>
+        </div>
     {% endblock content %}
 <body>
 

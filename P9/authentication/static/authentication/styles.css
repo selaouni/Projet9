@@ -1,14 +1,20 @@
-HTML{
+.sin_in {
     text-align: center;
 }
-body {
 
-  font-family: fantasy;
+.sin_up {
+    text-align: left;
 }
 
 .mon-flux{
 border-width:2px;
 }
+
+body {
+
+  font-family: fantasy;
+}
+
 
 .sidebar-nav{
 

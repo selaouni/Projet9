@@ -1,19 +1,15 @@
 HTML{
     text-align: center;
 }
+
 body {
-  font-family: Chalkduster;
+  font-family: fantasy;
 }
-
-.mon-flux{
-border-width:2px;
-}
-
 
 
 .bar-nav {
     max-width: 1000px;
-    border: 2px solid #696969	;
+    border: 2px solid #696969;
     margin: 30px;
     padding: 10px;
     text-align: center;
@@ -56,3 +52,6 @@ button{
 
 }
 
+.ticket_create{
+    text-align: left;
+}

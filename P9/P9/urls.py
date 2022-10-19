@@ -23,14 +23,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', LoginView.as_view(
-                template_name='authentication/login.html',
-                redirect_authenticated_user=True),
-            name='login'),
+        template_name='authentication/login.html',
+        redirect_authenticated_user=True),
+        name='login'),
     path('home/', flux.views.home, name='home'),
     path('logout/', authentication.views.logout_user, name='logout'),
     path('signup/', authentication.views.signup_page, name='signup'),
@@ -44,9 +42,6 @@ urlpatterns = [
     path('flux/<int:id>/delete_review', flux.views.delete_review, name='review_delete'),
     path('flux/<int:id>/unsubscribe', flux.views.unsubscribe, name='unsubscribe'),
     path('flux/<int:id>/create_review_onticket', flux.views.create_review_onticket, name='create_review_onticket'),
-
-
-
 ]
 # code pour flux
 if settings.DEBUG:

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 {% load static %}
 <head>
-    <link rel="stylesheet" href="{% static 'flux/styles.css' %}" />
+    <link rel="stylesheet" href="{% static 'authentication/styles.css' %}" />
 
 </head>
 
 {% block content %}
-    <p>{{ message }}</p>
-    <form method="post">
-        <img src="{% static 'flux/logo1.jpg' %}"  style="width:100px;height:100px;">
-        <h1>LITReview</h1>
-        {{ form.as_p }}
-        {% csrf_token %}
-        <button type="submit" >Se connecter</button>
-    </form>
-    <p>Pas encore membre ? <a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a></p>
+    <div class="sin_in">
+        <p>{{ message }}</p>
+        <form method="post">
+            <img src="{% static 'flux/logo1.jpg' %}"  style="width:100px;height:100px;">
+            <h1>LITReview</h1>
+            {{ form.as_p }}
+            {% csrf_token %}
+            <button type="submit" >Se connecter</button>
+        </form>
+        <p>Pas encore membre ? <a href="{% url 'signup' %}">Inscrivez-vous maintenant !</a></p>
+    </div>
 {% endblock content %}
