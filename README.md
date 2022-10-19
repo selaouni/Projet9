@@ -34,7 +34,7 @@ Les models de la la base de données sont:
 - Review
 - UserFollows
 
-Technologie utilisés:
+Technologies utilisées:
 - framework Django ;
 - SQLite comme base de données de développement locale,
 
@@ -54,10 +54,10 @@ Technologie utilisés:
     - Exécuter la migration de la base de données (les modèles) avec: 
         >> python manage.py migrate
     - Lancer le serveur (en fonction de votre version de python) avec :
-        >>python manage.py runserver ou python3 manage.py runserver
+        >>python manage.py runserver ou >>python3 manage.py runserver
     - Lancer la page web à partir du l'URL :  http://127.0.0.1:8000/
 
-Remarque: assurez-vous que votre version de Python est l'une de celles prises 
+Remarque: Assurez-vous que votre version de Python est l'une de celles prises 
 en charge par la dernière version de Django :
 https://docs.djangoproject.com/en/4.1/faq/install/#faq-python-version-support
 
