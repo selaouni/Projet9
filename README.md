@@ -101,3 +101,4 @@ Nota , versions appliquées pour ce projet:
 - https://docs.djangoproject.com/en/4.1/ref/templates/builtins/#include
 - https://stackoverflow.com/questions/63298721/how-to-update-imagefield-in-django
 - https://www.csestack.org/add-css-static-files-django/#:~:text=%E2%94%80%E2%94%80registration-,Including%20CSS%20in%20Django%20Template,HTML
+- https://books.agiliq.com/projects/django-orm-cookbook/en/latest/notequal_query.html

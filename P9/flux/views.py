@@ -2,20 +2,26 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from . import forms
 from . import models
+import authentication.models
 from django.contrib import messages
 from itertools import chain
 from django.db.models import CharField, Value, Q
+from django.contrib import auth
 
 
-@login_required
 def home(request):
-    review = models.Review.objects.all()
+    User = auth.get_user_model()
+    followed = models.UserFollows.objects.select_related("user").filter(Q(user=request.user))
+    not_followed = User.objects.exclude(id__in=followed)
+    review = models.Review.objects.exclude(id__in=not_followed)
     review = review.annotate(content_type=Value("REVIEW", CharField()))
     ticket = models.Ticket.objects.exclude(id__in=review.values("ticket_id"))
     ticket = ticket.annotate(content_type=Value("TICKET", CharField()))
     posts = sorted(chain(review, ticket), key=lambda post: (post.time_created), reverse=True)
 
-    context = {"posts": posts}
+    context = {
+                "posts": posts,
+                }
     return render(request, 'flux/home.html', context=context)
 
 
@@ -162,6 +168,7 @@ def post(request):
 @login_required
 def follow_users(request):
     # user = models.UserFollows.objects.get(username=request.POST["user"])
+    # user = authentication.models.User.objects.get(id=id)
     follow_form = forms.FollowUsersForm()
     if request.method == 'POST':
         follow_form = forms.FollowUsersForm(request.POST)
@@ -170,13 +177,14 @@ def follow_users(request):
             form_follow.user = request.user
             form_follow.save()
 
-    following = models.UserFollows.objects.select_related("user").filter(Q(user=request.user))
-    followed = models.UserFollows.objects.filter(followed_user=request.user)
+    followed = models.UserFollows.objects.select_related("user").filter(Q(user=request.user))
+    following = models.UserFollows.objects.filter(followed_user=request.user)
 
     context = {
         "follow_form": follow_form,
-        'following': following,
         'followed': followed,
+        'following': following,
+
 
     }
     return render(request, 'flux/subscription.html', context=context)

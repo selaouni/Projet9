@@ -22,7 +22,7 @@
         <br>
         <h2> Abonnements </h2>
 
-            {% for f in following %}
+            {% for f in followed %}
                 <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <p>
@@ -33,7 +33,7 @@
             {% endfor %}
         <br>
         <h2> Mes abonnés </h2>
-            {% for f in followed %}
+            {% for f in following %}
                 <p>{{ f.user }}</p>
             {% endfor %}
         <br>

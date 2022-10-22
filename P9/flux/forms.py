@@ -24,4 +24,4 @@ class FollowUsersForm(ModelForm):
         model = models.UserFollows
         fields = ['followed_user']
 
-    followed_user = forms.TextInput()
+    # followed_user = forms.CharField(max_length=128)

@@ -1,11 +1,14 @@
+
 HTML{
     text-align: center;
 }
-
 body {
   font-family: fantasy;
 }
 
+.user_connected{
+    text-align: right;
+}
 
 .bar-nav {
     max-width: 1000px;
@@ -52,6 +55,6 @@ button{
 
 }
 
-.ticket_create{
+.review_create{
     text-align: left;
 }
